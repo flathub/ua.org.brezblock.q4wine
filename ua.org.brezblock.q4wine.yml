@@ -89,8 +89,8 @@ modules:
                 INIT_D_PATH: /app/etc/init.d
             sources:
               - type: archive
-                url: https://github.com/libfuse/libfuse/archive/fuse-2.9.8.tar.gz
-                sha256: ceadc28f033b29d7aa1d7c3a5a267d51c2b572ed4e7346e0f9e24f4f5889debb
+                url: https://github.com/libfuse/libfuse/archive/fuse-2.9.9.tar.gz
+                sha256: e57a24721177c3b3dd71cb9239ca46b4dee283db9388d48f7ccd256184982194
               - type: shell
                 commands:
                   - ./makeconf.sh
@@ -109,8 +109,8 @@ modules:
     buildsystem: cmake-ninja
     sources:
       - type: archive
-        url: https://github.com/KDE/konsole/archive/v21.12.3.tar.gz
-        sha256: fb35afb4b647c99545a601374146a0447bfdf4245a9a227336e7c474fb0f1881
+        url: https://github.com/KDE/konsole/archive/v22.04.1.tar.gz
+        sha256: db5e0090d50bb3b7f56804fe0b28512eae4f12591188c73a3411473a5b4f695f
     cleanup:
       - /share/applications
       - /share/khotkeys
