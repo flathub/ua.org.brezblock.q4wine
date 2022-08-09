@@ -109,8 +109,8 @@ modules:
     buildsystem: cmake-ninja
     sources:
       - type: archive
-        url: https://github.com/KDE/konsole/archive/v22.04.1.tar.gz
-        sha256: db5e0090d50bb3b7f56804fe0b28512eae4f12591188c73a3411473a5b4f695f
+        url: https://github.com/KDE/konsole/archive/v22.04.3.tar.gz
+        sha256: 5265783d78b594363596665718b907f7769d9cfe
     cleanup:
       - /share/applications
       - /share/khotkeys
