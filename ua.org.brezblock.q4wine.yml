@@ -110,7 +110,7 @@ modules:
     sources:
       - type: archive
         url: https://github.com/KDE/konsole/archive/v22.04.3.tar.gz
-        sha256: 5265783d78b594363596665718b907f7769d9cfe
+        sha256: 603e5961d4ddde3bb3193941667ce387c878e6862684d78e9bc7fecea1bc3c34
     cleanup:
       - /share/applications
       - /share/khotkeys
