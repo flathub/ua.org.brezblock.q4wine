@@ -1,9 +1,9 @@
 id: ua.org.brezblock.q4wine
 runtime: org.kde.Platform
 sdk: org.kde.Sdk
-runtime-version: 5.15-21.08
+runtime-version: 5.15-22.08
 base: org.winehq.Wine
-base-version: stable-21.08
+base-version: stable-22.08
 command: q4wine
 rename-icon: q4wine
 rename-desktop-file: q4wine.desktop
