@@ -32,6 +32,11 @@ finish-args:
 cleanup:
   - '*.a'
   - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/pkgconfig
+  - /lib32/cmake
+  - /lib32/pkgconfig
   - /share/doc
   - /share/man
 inherit-extensions:
