@@ -71,6 +71,11 @@ modules:
         commit: 6b9831ce41841b1e08fa43f7214f3829b8952171
       - type: file
         path: ua.org.brezblock.q4wine.appdata.xml
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/brezerk/q4wine/releases/latest
+          tag-query: .tag_name
+          timestamp-query: .published_at
     modules:
 
       - name: fuseiso
