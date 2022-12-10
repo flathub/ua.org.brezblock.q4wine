@@ -94,6 +94,9 @@ modules:
               - type: shell
                 commands:
                   - ./makeconf.sh
+              - type: patch
+                paths:
+                  - fuse-closefrom.patch
             cleanup:
               - /etc
               - /include
