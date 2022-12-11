@@ -87,6 +87,7 @@ modules:
               env:
                 MOUNT_FUSE_PATH: /app/bin
                 INIT_D_PATH: /app/etc/init.d
+                UDEV_RULES_PATH: /app/etc/udev/rules.d
             sources:
               - type: archive
                 url: https://github.com/libfuse/libfuse/archive/fuse-2.9.9.tar.gz
