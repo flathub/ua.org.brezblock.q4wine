@@ -131,6 +131,8 @@ modules:
       - ln -srv /app/{utils/,}share/vulkan/implicit_layer.d
       - install -Dm755 pkexec.sh /app/bin/pkexec
       - install -Dm755 sudo.sh /app/bin/sudo
+      - ln -s /usr/bin/false /app/bin/mount
+      - ln -s /usr/bin/false /app/bin/umount
     sources:
       - type: script
         dest-filename: pkexec.sh
