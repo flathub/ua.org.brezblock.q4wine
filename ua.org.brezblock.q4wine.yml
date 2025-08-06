@@ -1,7 +1,7 @@
 id: ua.org.brezblock.q4wine
 runtime: org.kde.Platform
 sdk: org.kde.Sdk
-runtime-version: 5.15-24.08
+runtime-version: 6.9
 base: org.winehq.Wine
 base-version: stable-24.08
 command: q4wine
@@ -71,8 +71,8 @@ modules:
     sources:
       - type: git
         url: https://github.com/brezerk/q4wine.git
-        tag: v1.3.13
-        commit: 6b9831ce41841b1e08fa43f7214f3829b8952171
+        tag: v1.4.2
+        commit: f506d89976c427d4878ac968db448bf7dd8cdbe2
       - type: file
         path: ua.org.brezblock.q4wine.appdata.xml
         x-checker-data:
@@ -122,14 +122,14 @@ modules:
     buildsystem: cmake-ninja
     sources:
       - type: archive
-        url: https://github.com/KDE/konsole/archive/v22.04.3.tar.gz
-        sha256: 603e5961d4ddde3bb3193941667ce387c878e6862684d78e9bc7fecea1bc3c34
+        url: https://github.com/KDE/konsole/archive/refs/tags/v25.04.0.tar.gz
+        sha256: 8112dddd00576d5ec2d2eb9eee8dad3f2ab59a6b168f3beb4abb17c6d8c2daf3
     cleanup:
       - /share/applications
       - /share/khotkeys
-      - /share/knotifications5
-      - /share/kservices5
-      - /share/kservicetypes5
+      - /share/knotifications6
+      - /share/kservices6
+      - /share/kservicetypes6
       - /share/metainfo
 
   - name: q4wine-app-environment
