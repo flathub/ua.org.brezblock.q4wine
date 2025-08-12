@@ -1,9 +1,9 @@
 id: ua.org.brezblock.q4wine
 runtime: org.kde.Platform
 sdk: org.kde.Sdk
-runtime-version: 5.15-22.08
+runtime-version: 6.9
 base: org.winehq.Wine
-base-version: stable-22.08
+base-version: wow64-24.08
 command: q4wine
 rename-icon: q4wine
 rename-desktop-file: q4wine.desktop
@@ -11,7 +11,7 @@ finish-args:
   - --allow=devel # For Wine crash handling
   - --allow=multiarch
   - --device=all
-  - --env=GST_PLUGIN_SYSTEM_PATH=/app/lib32/gstreamer-1.0:/app/lib/gstreamer-1.0:/usr/lib/i386-linux-gnu/gstreamer-1.0:/usr/lib/x86_64-linux-gnu/gstreamer-1.0
+  - --env=GST_PLUGIN_SYSTEM_PATH=/app/lib/gstreamer-1.0:/usr/lib/x86_64-linux-gnu/gstreamer-1.0
   - --env=WINEDLLPATH=/app/dlls/lib32:/app/dlls/lib:/app/lib32/wine/wined3d:/app/lib/wine/wined3d
   - --env=WINEPREFIX=/var/data/wine
   - --filesystem=xdg-desktop
@@ -32,17 +32,17 @@ finish-args:
 cleanup:
   - '*.a'
   - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/pkgconfig
+  - /lib32/cmake
+  - /lib32/pkgconfig
   - /share/doc
   - /share/man
 inherit-extensions:
-  - org.freedesktop.Platform.Compat.i386
-  - org.freedesktop.Platform.ffmpeg_full.i386
   - org.freedesktop.Platform.ffmpeg-full
-  - org.freedesktop.Platform.GL32
-  - org.freedesktop.Platform.VAAPI.Intel.i386
-  - org.winehq.Wine.DLLs
-  - org.winehq.Wine.gecko
-  - org.winehq.Wine.mono
+  - org.winehq.Wine.gecko-wow64
+  - org.winehq.Wine.mono-wow64
 add-extensions:
   com.valvesoftware.Steam.Utility:
     subdirectories: true
@@ -67,10 +67,15 @@ modules:
     sources:
       - type: git
         url: https://github.com/brezerk/q4wine.git
-        tag: v1.3.13
-        commit: 6b9831ce41841b1e08fa43f7214f3829b8952171
+        tag: v1.4.2
+        commit: f506d89976c427d4878ac968db448bf7dd8cdbe2
       - type: file
         path: ua.org.brezblock.q4wine.appdata.xml
+        x-checker-data:
+          type: json
+          url: https://api.github.com/repos/brezerk/q4wine/releases/latest
+          tag-query: .tag_name
+          timestamp-query: .published_at
     modules:
 
       - name: fuseiso
@@ -79,6 +84,29 @@ modules:
             url: https://downloads.sourceforge.net/fuseiso/fuseiso-20070708.tar.bz2
             sha256: 8b242e077d66cd20900c59c905ff90b4c934b0613dd5a20facb0b1260ac5fd88
         modules:
+
+          - name: libfuse
+            config-opts:
+              - --enable-lib
+            build-options:
+              env:
+                MOUNT_FUSE_PATH: /app/bin
+                INIT_D_PATH: /app/etc/init.d
+                UDEV_RULES_PATH: /app/etc/udev/rules.d
+            sources:
+              - type: archive
+                url: https://github.com/libfuse/libfuse/archive/fuse-2.9.9.tar.gz
+                sha256: e57a24721177c3b3dd71cb9239ca46b4dee283db9388d48f7ccd256184982194
+              - type: shell
+                commands:
+                  - ./makeconf.sh
+              - type: patch
+                paths:
+                  - fuse-closefrom.patch
+            cleanup:
+              - /etc
+              - /include
+              - /lib/pkgconfig
 
       - name: icoutils
         sources:
@@ -90,14 +118,14 @@ modules:
     buildsystem: cmake-ninja
     sources:
       - type: archive
-        url: https://github.com/KDE/konsole/archive/v22.04.3.tar.gz
-        sha256: 603e5961d4ddde3bb3193941667ce387c878e6862684d78e9bc7fecea1bc3c34
+        url: https://github.com/KDE/konsole/archive/refs/tags/v25.04.0.tar.gz
+        sha256: 8112dddd00576d5ec2d2eb9eee8dad3f2ab59a6b168f3beb4abb17c6d8c2daf3
     cleanup:
       - /share/applications
       - /share/khotkeys
-      - /share/knotifications5
-      - /share/kservices5
-      - /share/kservicetypes5
+      - /share/knotifications6
+      - /share/kservices6
+      - /share/kservicetypes6
       - /share/metainfo
 
   - name: q4wine-app-environment
@@ -108,6 +136,8 @@ modules:
       - ln -srv /app/{utils/,}share/vulkan/implicit_layer.d
       - install -Dm755 pkexec.sh /app/bin/pkexec
       - install -Dm755 sudo.sh /app/bin/sudo
+      - ln -s /usr/bin/false /app/bin/mount
+      - ln -s /usr/bin/false /app/bin/umount
     sources:
       - type: script
         dest-filename: pkexec.sh
